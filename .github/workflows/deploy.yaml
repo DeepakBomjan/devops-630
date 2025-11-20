@@ -4,5 +4,5 @@ jobs:
   deploy-sample-website:
     runs-on: ubuntu-latest
     steps:
-      run: echo "My remote ssh host ip: ${{ vars.REMOTE_HOST_IP }}"
-      run: echo "My remote ssh host password: ${{ secrets.SSH_PASS }}"
+      - run: echo "My remote ssh host ip: ${{ vars.REMOTE_HOST_IP }}"
+      - run: echo "My remote ssh host password: ${{ secrets.SSH_PASS }}"
