@@ -5,3 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: "echo  ${{ vars.REMOTE_HOST_IP }}."
+      - name: setup ssh host
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PASS }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: deploy index.html
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SSH_USER }}@${{ vars.REMOTE_HOST_IP }} <<EOF
+          sudo echo "hello world" > /var/www/html/index.nginx-debian.html
+          EOF
+          echo "Successfully deployed!"
+
+        
