@@ -14,7 +14,7 @@ jobs:
       - name: deploy index.html
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SSH_USER }}@${{ vars.REMOTE_HOST_IP }} <<EOF
-          sudo echo "hello world" > /var/www/html/index.nginx-debian.html
+          echo "hello world 2" | sudo tee /var/www/html/index.nginx-debian.html
           EOF
           echo "Successfully deployed!"
 
